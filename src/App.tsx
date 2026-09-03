@@ -732,11 +732,11 @@ export default function App() {
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
                       {cred.image && (
-                        <div className="w-full sm:w-32 h-48 sm:h-20 shrink-0 rounded-md overflow-hidden bg-[var(--background)] border border-[var(--border)] relative">
+                        <div className="w-full sm:w-40 h-48 sm:h-28 shrink-0 rounded-md overflow-hidden bg-[var(--background)] border border-[var(--border)] relative flex items-center justify-center p-1">
                           <img
                             src={cred.image}
                             alt={cred.name}
-                            className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0"
+                            className="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0"
                             onError={(e) => {
                               (e.target as HTMLElement).style.display = 'none';
                             }}

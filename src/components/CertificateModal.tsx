@@ -91,7 +91,7 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
           </button>
         </div>
         
-        <div className="flex-1 overflow-hidden rounded border border-[var(--border)]/50 bg-[var(--card)] flex items-center justify-center relative min-h-[300px]">
+        <div className="flex-1 overflow-hidden rounded border border-[var(--border)]/50 bg-[var(--card)] flex items-center justify-center relative min-h-[200px] md:min-h-[400px] p-2">
           <img
             src={certificate.image}
             alt={certificate.name}
