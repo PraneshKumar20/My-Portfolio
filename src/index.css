@@ -905,14 +905,16 @@ h2 em,
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.project-card:hover .project-arrow-wrap {
+.project-card:hover .project-arrow-wrap,
+.cert-card:hover .project-arrow-wrap {
   border-color: var(--cyan);
   background: rgba(125, 249, 229, 0.12);
   box-shadow: 0 0 16px rgba(125, 249, 229, 0.3);
   transform: translate(2px, -2px);
 }
 
-.project-card:hover .project-arrow {
+.project-card:hover .project-arrow,
+.cert-card:hover .project-arrow {
   transform: translate(1px, -1px);
 }
 

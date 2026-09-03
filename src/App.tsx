@@ -85,6 +85,8 @@ const projects: ProjectData[] = [
     stack: ['JavaScript', 'Machine Learning', 'Geolocation', 'TailwindCSS'],
     visual: 'hairloon',
     image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-z4khcCQSEa5BKd1wDnsNSERghTSJyM.png',
+    githubUrl: 'https://github.com/PraneshKumar20/Hairloon',
+    liveUrl: 'https://hairloon.vercel.app/',
   },
   {
     number: '02',
@@ -539,7 +541,7 @@ export default function App() {
               {projects.map((project) => (
                 <article
                   key={project.title}
-                  className={`project-card ${project.visual}-card reveal`}
+                  className={`project-card ${project.visual}-card reveal group`}
                   data-tilt
                   onClick={() => setActiveProject(project)}
                 >
@@ -573,8 +575,11 @@ export default function App() {
                       <span>
                         {project.number} — {project.type}
                       </span>
-                      <div className="project-arrow-wrap" aria-hidden="true">
-                        <span className="project-arrow">↗</span>
+                      <div className="relative flex flex-col items-center">
+                        <div className="project-arrow-wrap" aria-hidden="true">
+                          <span className="project-arrow">↗</span>
+                        </div>
+                        <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity duration-300">Click</span>
                       </div>
                     </div>
 
@@ -740,7 +745,7 @@ export default function App() {
                 {credentials.map((cred) => (
                   <div
                     key={cred.id}
-                    className="flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-[var(--border)] cursor-pointer group hover:bg-[var(--card)] px-4 -mx-4 transition-colors"
+                    className="cert-card flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-[var(--border)] cursor-pointer group hover:bg-[var(--card)] px-4 -mx-4 transition-colors"
                     onClick={() => {
                       if (cred.action === 'leetcode') {
                         setShowLeetCodeModal(true);
@@ -776,9 +781,14 @@ export default function App() {
                         </span>
                       </div>
                     </div>
-                    <div className="mt-4 md:mt-0 opacity-50 group-hover:opacity-100 group-hover:text-[var(--cyan)] transition-all flex items-center justify-between">
-                      <span className="md:hidden font-mono text-xs">VIEW ↗</span>
-                      <ArrowUpRight className="hidden md:block" size={24} />
+                    <div className="mt-4 md:mt-0 flex items-center justify-between transition-all">
+                      <span className="md:hidden font-mono text-xs opacity-50 group-hover:opacity-100 group-hover:text-[var(--cyan)] transition-all">VIEW ↗</span>
+                      <div className="relative hidden md:flex flex-col items-center">
+                        <div className="project-arrow-wrap">
+                          <ArrowUpRight className="project-arrow" size={18} />
+                        </div>
+                        <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity duration-300">Click</span>
+                      </div>
                     </div>
                   </div>
                 ))}

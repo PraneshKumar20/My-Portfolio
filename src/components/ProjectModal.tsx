@@ -123,20 +123,31 @@ export function ProjectModal({
           <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-[var(--border)]">
             <a
               href="mailto:raju.praneshkumar@gmail.com?subject=Inquiry regarding project "
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--card)] text-[var(--background)] font-mono text-xs font-bold rounded hover:bg-[var(--card)] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-transparent border border-[var(--cyan)]/40 text-[var(--cyan)]/80 font-mono text-xs rounded hover:-translate-y-1 hover:border-[var(--cyan)] hover:text-[var(--cyan)] hover:bg-[var(--cyan)]/10 transition-all duration-300"
             >
               <ExternalLink size={14} />
               <span>Discuss Project</span>
             </a>
             <a
-              href="https://github.com"
+              href={project.githubUrl || "https://github.com"}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-transparent border border-[var(--border)] text-[var(--foreground)] font-mono text-xs rounded hover:border-[var(--border)] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-transparent border border-[var(--cyan)]/40 text-[var(--cyan)]/80 font-mono text-xs rounded hover:-translate-y-1 hover:border-[var(--cyan)] hover:text-[var(--cyan)] hover:bg-[var(--cyan)]/10 transition-all duration-300"
             >
               <Github size={14} />
               <span>View Code Repo</span>
             </a>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-transparent border border-[var(--cyan)]/40 text-[var(--cyan)]/80 font-mono text-xs rounded hover:-translate-y-1 hover:border-[var(--cyan)] hover:text-[var(--cyan)] hover:bg-[var(--cyan)]/10 transition-all duration-300"
+              >
+                <ExternalLink size={14} />
+                <span>Live Demo</span>
+              </a>
+            )}
           </div>
         </motion.div>
       </div>

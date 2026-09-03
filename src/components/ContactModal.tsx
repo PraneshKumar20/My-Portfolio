@@ -70,7 +70,14 @@ export function ContactModal({
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        let errorMessage = 'Failed to send message';
+        try {
+          const errData = await response.json();
+          errorMessage = errData.error || errorMessage;
+        } catch (e) {
+          // Ignore json parse errors if response is not json
+        }
+        throw new Error(errorMessage);
       }
 
       setIsSubmitting(false);
