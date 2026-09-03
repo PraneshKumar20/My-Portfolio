@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, Check, Code, Copy, Sparkles, Terminal, Mail, Layers, Sun, Moon, Heart } from 'lucide-react';
+import { ArrowUpRight, Check, Code, Copy, Sparkles, Terminal, Mail, Layers, Sun, Moon, Heart, Download } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CustomCursor } from './components/animations/CustomCursor';
 import { SmoothScroll } from './components/animations/SmoothScroll';
@@ -442,23 +442,33 @@ export default function App() {
                 I&apos;m Pranesh — a developer from Coimbatore crafting scalable web applications,
                 thoughtful interfaces, and the systems between them.
               </p>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10">
-                <button
-                  className="magnetic cta bg-transparent border-0 border-b border-[var(--border)]"
-                  data-magnetic
-                  onClick={() => setShowContactModal(true)}
-                >
-                  Let&apos;s work together <span>↗</span>
-                </button>
-                <div className="flex flex-wrap items-center gap-5 sm:gap-8 pt-2 sm:pt-0">
-                  <a href="https://github.com/PraneshKumar20" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[var(--cyan)] font-sans text-sm font-medium tracking-wide hover:text-[#a5fbf0] transition-colors group">
-                    Github <span className="text-[var(--purple)] text-lg transition-transform duration-200 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</span>
+              <div className="flex flex-col gap-8 mt-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+                  <button
+                    className="magnetic cta bg-transparent border-0 border-b border-[var(--cyan)]"
+                    data-magnetic
+                    onClick={() => setShowContactModal(true)}
+                  >
+                    Let&apos;s work together <span>↗</span>
+                  </button>
+                  <a
+                    href="/Pranesh-Kumar-Resume.pdf"
+                    download="Pranesh-Kumar-Resume.pdf"
+                    className="magnetic cta bg-transparent border-0 border-b border-[var(--cyan)]"
+                    data-magnetic
+                  >
+                    Download Resume <span className="flex items-center"><Download size={18} /></span>
                   </a>
-                  <a href="https://www.linkedin.com/in/raju-pranesh-kumar" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[var(--cyan)] font-sans text-sm font-medium tracking-wide hover:text-[#a5fbf0] transition-colors group">
-                    LinkedIn <span className="text-[var(--purple)] text-lg transition-transform duration-200 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</span>
+                </div>
+                <div className="flex lg:hidden flex-wrap items-center gap-5 sm:gap-8">
+                  <a href="https://github.com/PraneshKumar20" target="_blank" rel="noreferrer" className="magnetic cta bg-transparent border-0 border-b border-[var(--cyan)]" data-magnetic>
+                    Github <span>↗</span>
                   </a>
-                  <a href="https://leetcode.com/u/praneshkumar20/" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[var(--cyan)] font-sans text-sm font-medium tracking-wide hover:text-[#a5fbf0] transition-colors group">
-                    LeetCode <span className="text-[var(--purple)] text-lg transition-transform duration-200 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</span>
+                  <a href="https://www.linkedin.com/in/raju-pranesh-kumar" target="_blank" rel="noreferrer" className="magnetic cta bg-transparent border-0 border-b border-[var(--cyan)]" data-magnetic>
+                    LinkedIn <span>↗</span>
+                  </a>
+                  <a href="https://leetcode.com/u/praneshkumar20/" target="_blank" rel="noreferrer" className="magnetic cta bg-transparent border-0 border-b border-[var(--cyan)]" data-magnetic>
+                    LeetCode <span>↗</span>
                   </a>
                 </div>
               </div>
@@ -484,6 +494,19 @@ export default function App() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Social links under profile image (Desktop only) */}
+            <div className="absolute hidden lg:flex justify-center items-center gap-6 z-20 w-[min(32vw,370px)] right-[2%] top-[calc(max(10%,15vh)+min(65vh,600px)+24px)]">
+              <a href="https://github.com/PraneshKumar20" target="_blank" rel="noreferrer" className="magnetic cta bg-transparent border-0 border-b border-[var(--cyan)]" data-magnetic>
+                Github <span>↗</span>
+              </a>
+              <a href="https://www.linkedin.com/in/raju-pranesh-kumar" target="_blank" rel="noreferrer" className="magnetic cta bg-transparent border-0 border-b border-[var(--cyan)]" data-magnetic>
+                LinkedIn <span>↗</span>
+              </a>
+              <a href="https://leetcode.com/u/praneshkumar20/" target="_blank" rel="noreferrer" className="magnetic cta bg-transparent border-0 border-b border-[var(--cyan)]" data-magnetic>
+                LeetCode <span>↗</span>
+              </a>
             </div>
 
             <div className="hero-meta">

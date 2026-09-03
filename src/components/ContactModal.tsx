@@ -37,11 +37,42 @@ export function ContactModal({
   };
 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      onShowToast('Please fill in all fields.');
+      return;
+    }
+
+    if (!/^\S+@\S+\.\S+$/.test(trimmedEmail)) {
+      onShowToast('Please enter a valid email address.');
+      return;
+    }
+
     setIsSubmitting(true);
     
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          message: trimmedMessage,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
       setIsSubmitting(false);
       setIsSent(true);
 
@@ -73,7 +104,11 @@ export function ContactModal({
         setEmail('');
         setMessage('');
       }, 3000);
-    }, 800);
+    } catch (error) {
+      console.error('Contact error:', error);
+      setIsSubmitting(false);
+      onShowToast('Something went wrong. Please try again.');
+    }
   };
 
   return (
