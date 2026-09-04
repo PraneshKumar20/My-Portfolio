@@ -646,11 +646,12 @@ h2 em,
   grid-template-columns: 1.15fr 0.85fr;
   background: var(--card);
   border: 1px solid var(--border);
-  overflow: hidden;
+  /* overflow: hidden is intentionally removed — it flattens the browser 3D stacking
+     context and suppresses GSAP rotationX/rotationY. Child elements that need
+     clipping (.project-visual, .project-info) carry their own overflow: hidden. */
   transform-style: preserve-3d;
   cursor: pointer;
   transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.4s ease,
     box-shadow 0.45s ease,
     background-color 0.45s ease;
@@ -916,6 +917,10 @@ h2 em,
 .project-card:hover .project-arrow,
 .cert-card:hover .project-arrow {
   transform: translate(1px, -1px);
+}
+
+.project-info {
+  overflow: hidden;
 }
 
 .project-body {

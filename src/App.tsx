@@ -344,27 +344,89 @@ export default function App() {
 
       // Removed portrait lighting and drift response per user request for a completely stable frame
 
-      // Tilt cards & Dynamic Spotlight
-      const tiltItems = root.querySelectorAll<HTMLElement>('[data-tilt]');
-      tiltItems.forEach((item) => {
-        const move = (event: PointerEvent) => {
-          const rect = item.getBoundingClientRect();
-          const x = event.clientX - rect.left;
-          const y = event.clientY - rect.top;
-          const rotateX = ((y / rect.height) - 0.5) * -5;
-          const rotateY = ((x / rect.width) - 0.5) * 5;
-          item.style.setProperty('--mouse-x', `${x}px`);
-          item.style.setProperty('--mouse-y', `${y}px`);
-          item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      // ─── PROJECT CARD 3D TILT ───────────────────────────────────────────────
+      // Clean, isolated mouse-follow tilt for project cards only.
+      // Max rotation: ±7° (subtle, premium). No y-lift. Spotlight tracking via CSS vars.
+      const projectCards = root.querySelectorAll<HTMLElement>('.project-card[data-tilt]');
+      projectCards.forEach((card) => {
+        // Set perspective once — does not interfere with quickTo
+        gsap.set(card, { transformPerspective: 1000, transformStyle: 'preserve-3d' });
+
+        const rxTo = gsap.quickTo(card, 'rotationX', { duration: 0.55, ease: 'power3.out' });
+        const ryTo = gsap.quickTo(card, 'rotationY', { duration: 0.55, ease: 'power3.out' });
+
+        const onCardMove = (e: PointerEvent) => {
+          // Allow mouse on touch laptops; skip pure touch events
+          if (e.pointerType === 'touch') return;
+
+          const rect = card.getBoundingClientRect();
+          // Normalized 0–1 coordinates inside the card
+          const nx = (e.clientX - rect.left) / rect.width;
+          const ny = (e.clientY - rect.top) / rect.height;
+
+          // Cursor LEFT (nx→0)  → rotateY negative → card tilts right  ✓
+          // Cursor RIGHT (nx→1) → rotateY positive → card tilts left   ✓
+          // Cursor TOP (ny→0)   → rotateX positive → card tilts down   ✓
+          // Cursor BOTTOM(ny→1) → rotateX negative → card tilts up     ✓
+          const ry = (nx - 0.5) * 14;   // ±7°
+          const rx = (0.5 - ny) * 14;   // ±7°
+
+          ryTo(ry);
+          rxTo(rx);
+
+          // Update spotlight CSS vars for the ::before pseudo-element
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
         };
-        const leave = () => {
-          item.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+
+        const onCardLeave = (e: PointerEvent) => {
+          if (e.pointerType === 'touch') return;
+          // Smooth return to neutral — no snap
+          rxTo(0);
+          ryTo(0);
         };
-        item.addEventListener('pointermove', move);
-        item.addEventListener('pointerleave', leave);
+
+        card.addEventListener('pointermove', onCardMove);
+        card.addEventListener('pointerleave', onCardLeave);
         cleanups.push(() => {
-          item.removeEventListener('pointermove', move);
-          item.removeEventListener('pointerleave', leave);
+          card.removeEventListener('pointermove', onCardMove);
+          card.removeEventListener('pointerleave', onCardLeave);
+        });
+      });
+
+      // ─── BENTO CARD TILT (unchanged behavior) ───────────────────────────────
+      // Bento cards use a shallower feel — retain the original ±8° + subtle y-lift.
+      // These do NOT have a spotlight pseudo-element so no --mouse-x/y tracking needed.
+      const bentoCards = root.querySelectorAll<HTMLElement>('.bento-card[data-tilt]');
+      bentoCards.forEach((item) => {
+        gsap.set(item, { transformPerspective: 1000, transformStyle: 'preserve-3d' });
+
+        const xTo = gsap.quickTo(item, 'rotationY', { duration: 0.6, ease: 'power3' });
+        const yTo = gsap.quickTo(item, 'rotationX', { duration: 0.6, ease: 'power3' });
+        const transYTo = gsap.quickTo(item, 'y', { duration: 0.6, ease: 'power3' });
+
+        const onBentoMove = (e: PointerEvent) => {
+          if (e.pointerType === 'touch') return;
+          const rect = item.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          xTo(((x / rect.width) - 0.5) * 16);
+          yTo(((y / rect.height) - 0.5) * -16);
+          transYTo(-4);
+        };
+
+        const onBentoLeave = (e: PointerEvent) => {
+          if (e.pointerType === 'touch') return;
+          xTo(0);
+          yTo(0);
+          transYTo(0);
+        };
+
+        item.addEventListener('pointermove', onBentoMove);
+        item.addEventListener('pointerleave', onBentoLeave);
+        cleanups.push(() => {
+          item.removeEventListener('pointermove', onBentoMove);
+          item.removeEventListener('pointerleave', onBentoLeave);
         });
       });
 
@@ -539,12 +601,12 @@ export default function App() {
 
             <div className="project-list">
               {projects.map((project) => (
-                <article
-                  key={project.title}
-                  className={`project-card ${project.visual}-card reveal group`}
-                  data-tilt
-                  onClick={() => setActiveProject(project)}
-                >
+                <div className="reveal project-card-wrapper" key={project.title}>
+                  <article
+                    className={`project-card ${project.visual}-card group`}
+                    data-tilt
+                    onClick={() => setActiveProject(project)}
+                  >
                   <div className={`project-visual ${project.visual}`}>
                     {project.image ? (
                       <img
@@ -594,7 +656,8 @@ export default function App() {
                       ))}
                     </div>
                   </div>
-                </article>
+                  </article>
+                </div>
               ))}
             </div>
           </section>
