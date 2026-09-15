@@ -1232,41 +1232,6 @@ h2 em,
   text-shadow: 0 0 10px rgba(125, 249, 229, 0.5);
 }
 
-/* Satellite Ring */
-.footer-orbit::before {
-  content: "";
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(125, 249, 229, 0.4);
-  border-radius: 50%;
-  bottom: -3px;
-  left: -3px;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Satellite Dot */
-.footer-orbit::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: var(--cyan);
-  border-radius: 50%;
-  bottom: 10px;
-  left: 10px;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.footer-orbit:hover::before {
-  transform: scale(1.4);
-  border-color: rgba(125, 249, 229, 0.8);
-}
-
-.footer-orbit:hover::after {
-  box-shadow: 0 0 15px var(--cyan);
-  transform: scale(1.2);
-}
 
 @keyframes orbit-float {
   from {
