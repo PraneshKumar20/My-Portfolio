@@ -1029,7 +1029,6 @@ h2 em,
 
 .intro-card {
   grid-row: span 2;
-  background: linear-gradient(140deg, var(--card), var(--background));
 }
 
 .text-link {
