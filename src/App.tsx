@@ -706,17 +706,17 @@ export default function App() {
 
                 <div className="mt-5 flex flex-col gap-6 relative z-10">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">Full-Stack</span>
-                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">Java + DSA</span>
-                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">AI / ML</span>
-                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">Product Building</span>
+                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] hover:border-[var(--cyan)] text-[9.5px] font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] uppercase tracking-wider rounded-sm transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Full-Stack</span>
+                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] hover:border-[var(--cyan)] text-[9.5px] font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] uppercase tracking-wider rounded-sm transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Java + DSA</span>
+                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] hover:border-[var(--cyan)] text-[9.5px] font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] uppercase tracking-wider rounded-sm transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">AI / ML</span>
+                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] hover:border-[var(--cyan)] text-[9.5px] font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] uppercase tracking-wider rounded-sm transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Product Building</span>
                   </div>
 
                   <button
                     onClick={() => setShowContactModal(true)}
                     className="text-link bg-transparent border-0 cursor-pointer text-left p-0 w-fit group flex items-center gap-1.5"
                   >
-                    Explore my work <span className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+                    Get connected! <span className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
                   </button>
                 </div>
                 
