@@ -818,11 +818,11 @@ export default function App() {
                 <p>Professional credentials and milestones.</p>
               </div>
 
-              <div className="flex flex-col gap-0 border-t border-[var(--border)]">
+              <div className="flex flex-col gap-0">
                 {credentials.map((cred) => (
                   <div
                     key={cred.id}
-                    className="cert-card flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b last:border-b-0 border-[var(--border)] cursor-pointer group hover:bg-[var(--card)] px-4 -mx-4 transition-colors"
+                    className="cert-card flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-t border-[var(--border)] cursor-pointer group hover:bg-[var(--card)] px-4 -mx-4 transition-colors"
                     onClick={() => {
                       if (cred.action === 'leetcode') {
                         setShowLeetCodeModal(true);
