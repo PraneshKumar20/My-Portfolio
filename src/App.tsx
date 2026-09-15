@@ -109,7 +109,8 @@ const projects: ProjectData[] = [
       'CSV transaction export',
       'Light and Dark themes',
       'Responsive design'
-    ]
+    ],
+    liveUrl: 'https://ledgerxl.vercel.app/'
   },
 ];
 
