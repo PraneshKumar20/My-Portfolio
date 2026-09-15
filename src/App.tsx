@@ -963,7 +963,7 @@ export default function App() {
                 <span className="coordinates">11.0168° N / 76.9558° E</span>
               </div>
 
-              <InteractiveToolkitCard />
+              <InteractiveToolkitCard activeFilter={activeSkillFilter} onSkillSelect={handleSkillSelect} />
             </div>
           </section>
 
