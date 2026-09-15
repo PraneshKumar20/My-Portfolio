@@ -90,13 +90,26 @@ const projects: ProjectData[] = [
   },
   {
     number: '02',
-    title: 'Expense Tracker',
+    title: 'LedgerXL',
     type: 'FULL-STACK / MERN',
     description:
-      'A focused finance workspace for logging transactions, planning budgets, and making everyday money feel legible.',
-    stack: ['MongoDB', 'Express', 'React', 'Node.js', 'Chart.js'],
+      'A full-stack personal finance platform for tracking transactions, managing budgets and savings goals, monitoring recurring bills, and gaining actionable financial insights through interactive analytics.',
+    stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Recharts'],
     visual: 'expense',
-    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-duKoBpxISnUhqhHIMNOSiCxRxZUGa1.png',
+    image: '/ledgerxl.png',
+    highlights: [
+      'Transaction tracking with CRUD operations',
+      'Natural-language Quick Add',
+      'Budget and category envelope management',
+      'Savings goals and milestones',
+      'Subscription and recurring bill tracking',
+      'Financial health scoring',
+      'INR/USD currency support',
+      'Interactive financial analytics',
+      'CSV transaction export',
+      'Light and Dark themes',
+      'Responsive design'
+    ]
   },
 ];
 

@@ -637,7 +637,7 @@ h2 em,
 .project-list {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 64px;
 }
 
 .project-card {
