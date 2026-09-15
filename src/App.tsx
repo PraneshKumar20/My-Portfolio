@@ -173,7 +173,7 @@ const InteractiveToolkitCard = () => {
   return (
     <div 
       ref={cardRef}
-      className="bento-card skills-card reveal flex flex-col justify-start gap-8 group relative overflow-hidden" 
+      className="bento-card skills-card reveal flex flex-col justify-start gap-5 group relative overflow-hidden" 
       data-tilt
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -181,19 +181,19 @@ const InteractiveToolkitCard = () => {
     >
       <div className="absolute inset-0 pointer-events-none opacity-40 transition-opacity duration-700 group-hover:opacity-100 motion-reduce:hidden">
         <div className="absolute top-[20%] left-[15%] w-1 h-1 bg-[var(--cyan)] rounded-full shadow-[0_0_8px_var(--cyan)] transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -30px), calc((var(--mouse-y) - 0.5) * -30px))' }} />
-        <div className="absolute top-[70%] left-[80%] w-1.5 h-1.5 bg-[var(--purple)] rounded-full shadow-[0_0_8px_var(--purple)] transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 40px), calc((var(--mouse-y) - 0.5) * 40px))' }} />
+        <div className="absolute top-[45%] left-[85%] w-1 h-1 bg-[var(--purple)] rounded-full shadow-[0_0_8px_var(--purple)] opacity-70 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 30px), calc((var(--mouse-y) - 0.5) * 30px))' }} />
         <div className="absolute top-[80%] left-[20%] w-0.5 h-0.5 bg-[var(--foreground)] rounded-full transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * 25px))' }} />
-        <div className="absolute top-[30%] left-[75%] w-1 h-1 bg-[var(--cyan)] rounded-full opacity-50 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * -40px))' }} />
+        <div className="absolute top-[30%] left-[75%] w-1 h-1 bg-[var(--cyan)] rounded-full opacity-40 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * -40px))' }} />
         
         <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
            <path d="M 0,50 Q 150,200 350,50" fill="none" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="2 6" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * -15px))' }} />
-           <path d="M 350,250 Q 200,-50 0,250" fill="none" stroke="var(--purple)" strokeWidth="0.5" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * 20px))' }} />
+           <path d="M 350,250 Q 200,-50 0,250" fill="none" stroke="var(--purple)" strokeWidth="0.5" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 15px), calc((var(--mouse-y) - 0.5) * 15px))' }} />
         </svg>
       </div>
 
       <span className="card-label relative z-10">THE TOOLKIT</span>
       
-      <div className="flex flex-col gap-6 relative z-10 w-full">
+      <div className="flex flex-col gap-4 relative z-10 w-full">
         {toolkitCategories.map((category) => {
           const isCategoryHovered = hoveredCategory === category.name;
           const isOtherCategoryHovered = hoveredCategory !== null && hoveredCategory !== category.name;
@@ -201,8 +201,8 @@ const InteractiveToolkitCard = () => {
           return (
             <div 
               key={category.name}
-              className={`flex flex-col gap-3 transition-all duration-500
-                ${isOtherCategoryHovered ? 'opacity-30' : 'opacity-100'}
+              className={`flex flex-col gap-2.5 transition-all duration-500
+                ${isOtherCategoryHovered ? 'opacity-50' : 'opacity-100'}
               `}
               onMouseEnter={() => setHoveredCategory(category.name)}
               onFocus={() => setHoveredCategory(category.name)}
@@ -229,9 +229,9 @@ const InteractiveToolkitCard = () => {
                     <div
                       key={skill}
                       className={`relative px-[10px] py-[7px] border transition-all duration-300 cursor-default flex items-center gap-2 outline-none
-                        ${isSkillHovered ? 'border-[var(--cyan)] text-[var(--foreground)] -translate-y-1 shadow-[0_4px_15px_rgba(125,249,229,0.15)] bg-white/5' : 'border-[var(--border)] text-[var(--muted-foreground)] bg-white/2'}
-                        ${isCategoryHovered && !isSkillHovered ? 'border-[var(--cyan)]/30 text-[var(--foreground)] bg-white/5' : ''}
-                        ${isOtherSkillHovered ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}
+                        ${isSkillHovered ? 'border-[var(--cyan)] text-[var(--foreground)] -translate-y-[2px] shadow-[0_2px_10px_rgba(125,249,229,0.1)] bg-white/5' : 'border-[var(--border)] text-[var(--foreground)] opacity-80 bg-white/2'}
+                        ${isCategoryHovered && !isSkillHovered ? 'border-[var(--cyan)]/30 text-[var(--foreground)] opacity-100 bg-white/5' : ''}
+                        ${isOtherSkillHovered ? 'opacity-60 scale-[0.98]' : 'scale-100'}
                       `}
                       onMouseEnter={() => {
                         setHoveredSkill(skill);
