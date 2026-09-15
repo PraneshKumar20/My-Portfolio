@@ -148,7 +148,24 @@ const toolkitCategories = [
   }
 ];
 
-const InteractiveToolkitCard = () => {
+const skillAliases: Record<string, string[]> = {
+  'React.js': ['React', 'React.js'],
+  'Node.js': ['Node', 'Node.js'],
+  'Express.js': ['Express', 'Express.js'],
+  'Tailwind CSS': ['Tailwind CSS', 'TailwindCSS']
+};
+
+export const matchesSkill = (projectTags: string[], filterSkill: string) => {
+  const aliases = skillAliases[filterSkill] || [filterSkill];
+  return projectTags.some(tag => aliases.includes(tag));
+};
+
+type InteractiveToolkitCardProps = {
+  activeFilter: string | null;
+  onSkillSelect: (skill: string) => void;
+};
+
+const InteractiveToolkitCard: React.FC<InteractiveToolkitCardProps> = ({ activeFilter, onSkillSelect }) => {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -199,7 +216,7 @@ const InteractiveToolkitCard = () => {
           const isOtherCategoryHovered = hoveredCategory !== null && hoveredCategory !== category.name;
           
           return (
-            <div 
+             <div 
               key={category.name}
               className={`flex flex-col gap-3 transition-all duration-500
                 ${isOtherCategoryHovered ? 'opacity-50' : 'opacity-100'}
@@ -207,7 +224,7 @@ const InteractiveToolkitCard = () => {
               onMouseEnter={() => setHoveredCategory(category.name)}
               onFocus={() => setHoveredCategory(category.name)}
               onBlur={() => setHoveredCategory(null)}
-              tabIndex={0}
+              tabIndex={-1}
             >
               <div className="flex items-center gap-3">
                 <span className={`font-mono text-[9px] uppercase tracking-widest transition-colors duration-300
@@ -222,16 +239,20 @@ const InteractiveToolkitCard = () => {
               
               <div className="flex flex-wrap items-center gap-2">
                 {category.skills.map((skill) => {
+                  const isActive = activeFilter === skill;
                   const isSkillHovered = hoveredSkill === skill;
                   const isOtherSkillHovered = hoveredSkill !== null && hoveredSkill !== skill;
                   
                   return (
-                    <div
+                    <button
                       key={skill}
-                      className={`relative px-[10px] py-[7px] border transition-all duration-300 cursor-default flex items-center gap-2 outline-none
-                        ${isSkillHovered ? 'border-[var(--cyan)] text-[var(--foreground)] -translate-y-[2px] shadow-[0_2px_10px_rgba(125,249,229,0.1)] bg-white/5' : 'border-[var(--border)] text-[var(--foreground)] opacity-80 bg-white/2'}
-                        ${isCategoryHovered && !isSkillHovered ? 'border-[var(--cyan)]/30 text-[var(--foreground)] opacity-100 bg-white/5' : ''}
-                        ${isOtherSkillHovered ? 'opacity-60 scale-[0.98]' : 'scale-100'}
+                      onClick={() => onSkillSelect(skill)}
+                      className={`relative px-[10px] py-[7px] border transition-all duration-300 cursor-pointer flex items-center gap-2 outline-none
+                        ${isActive ? 'border-[var(--cyan)]/50 text-[var(--cyan)] bg-[var(--cyan)]/10 shadow-[0_2px_10px_rgba(125,249,229,0.15)] -translate-y-[2px]' : 
+                          isSkillHovered ? 'border-[var(--cyan)] text-[var(--foreground)] -translate-y-[2px] shadow-[0_2px_10px_rgba(125,249,229,0.1)] bg-white/5' : 
+                          'border-[var(--border)] text-[var(--foreground)] opacity-80 bg-white/2'}
+                        ${isCategoryHovered && !isSkillHovered && !isActive ? 'border-[var(--cyan)]/30 text-[var(--foreground)] opacity-100 bg-white/5' : ''}
+                        ${isOtherSkillHovered && !isActive ? 'opacity-60 scale-[0.98]' : 'scale-100'}
                       `}
                       onMouseEnter={() => {
                         setHoveredSkill(skill);
@@ -242,15 +263,14 @@ const InteractiveToolkitCard = () => {
                         setHoveredCategory(category.name);
                       }}
                       onBlur={() => setHoveredSkill(null)}
-                      tabIndex={0}
-                      role="button"
                       aria-label={skill}
+                      aria-pressed={isActive}
                     >
                       <span className="font-mono text-[10px] whitespace-nowrap">{skill}</span>
                       <div className={`absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300
-                        ${isSkillHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+                        ${isSkillHovered || isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
                       `} />
-                    </div>
+                    </button>
                   );
                 })}
               </div>
@@ -265,12 +285,33 @@ const InteractiveToolkitCard = () => {
 export default function App() {
   const rootRef = useRef<HTMLElement>(null);
   const [activeProject, setActiveProject] = useState<ProjectData | null>(null);
+  const [activeSkillFilter, setActiveSkillFilter] = useState<string | null>(null);
   const [activeCertificate, setActiveCertificate] = useState<{ name: string, issuer: string, image: string } | null>(null);
   const [showLeetCodeModal, setShowLeetCodeModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+  const handleSkillSelect = (skill: string) => {
+    setActiveSkillFilter(prev => prev === skill ? null : skill);
+    
+    if (skill !== activeSkillFilter) {
+      setTimeout(() => {
+        const workSection = document.getElementById('work');
+        if (workSection) {
+          const rect = workSection.getBoundingClientRect();
+          if (rect.top > window.innerHeight * 0.75 || rect.top < -50) {
+            workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 50);
+    }
+  };
+
+  const filteredProjects = activeSkillFilter 
+    ? projects.filter(project => matchesSkill(project.stack, activeSkillFilter))
+    : projects;
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -746,73 +787,99 @@ export default function App() {
               </p>
             </div>
 
-            <div className="project-list">
-              {projects.map((project) => (
-                <div className="reveal project-card-wrapper" key={project.title}>
-                  <article
-                    className={`project-card ${project.visual}-card group`}
-                    data-tilt
-                    onClick={() => setActiveProject(project)}
-                  >
-                  <div className={`project-visual ${project.visual}`}>
-                    {project.image ? (
-                      <img
-                        className="project-image"
-                        src={project.image}
-                        alt={`${project.title} project interface`}
-                        onError={(e) => {
-                          (e.target as HTMLElement).style.display = 'none';
-                        }}
-                      />
-                    ) : (
-                      <>
-                        <div className="visual-noise" />
-                        <div className="visual-window">
-                          <span />
-                          <span />
-                          <span />
-                        </div>
-                        <div className="visual-mark">
-                          {project.visual === 'hairloon' ? 'H' : '₹'}
-                        </div>
-                      </>
-                    )}
-                  </div>
+            {activeSkillFilter && (
+              <div className="flex items-center justify-between bg-white/5 border border-[var(--border)] px-4 py-3 rounded-md mb-8 reveal">
+                <span className="text-xs text-[var(--muted-foreground)]">
+                  Showing projects using <strong className="text-[var(--cyan)] font-mono font-normal">{activeSkillFilter}</strong>
+                </span>
+                <button 
+                  onClick={() => handleSkillSelect(activeSkillFilter)}
+                  className="text-xs text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--cyan)] transition-colors bg-transparent border-0 cursor-pointer p-0"
+                >
+                  Clear filter
+                </button>
+              </div>
+            )}
 
-                  <div className="project-info">
-                    <div className="project-topline">
-                      <span>
-                        {project.number} — {project.type}
-                      </span>
-                      <div className="relative flex flex-col items-center">
-                        <div className="project-arrow-wrap" aria-hidden="true">
-                          <span className="project-arrow">↗</span>
+            {filteredProjects.length === 0 ? (
+              <div className="w-full py-16 text-center border border-[var(--border)] border-dashed rounded-lg bg-white/2 reveal">
+                <p className="text-[var(--muted-foreground)] text-sm mb-4">No projects currently tagged with this technology.</p>
+                <button 
+                  onClick={() => handleSkillSelect(activeSkillFilter!)} 
+                  className="text-xs text-[var(--foreground)] hover:text-[var(--cyan)] transition-colors bg-transparent border border-[var(--border)] px-4 py-2 rounded cursor-pointer"
+                >
+                  Clear filter
+                </button>
+              </div>
+            ) : (
+              <div className="project-list">
+                {filteredProjects.map((project) => (
+                  <div className="reveal project-card-wrapper" key={project.title}>
+                    <article
+                      className={`project-card ${project.visual}-card group`}
+                      data-tilt
+                      onClick={() => setActiveProject(project)}
+                    >
+                    <div className={`project-visual ${project.visual}`}>
+                      {project.image ? (
+                        <img
+                          className="project-image"
+                          src={project.image}
+                          alt={`${project.title} project interface`}
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <>
+                          <div className="visual-noise" />
+                          <div className="visual-window">
+                            <span />
+                            <span />
+                            <span />
+                          </div>
+                          <div className="visual-mark">
+                            {project.visual === 'hairloon' ? 'H' : '₹'}
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="project-info">
+                      <div className="project-topline">
+                        <span>
+                          {project.number} — {project.type}
+                        </span>
+                        <div className="relative flex flex-col items-center">
+                          <div className="project-arrow-wrap" aria-hidden="true">
+                            <span className="project-arrow">↗</span>
+                          </div>
+                          <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity duration-300">Click</span>
                         </div>
-                        <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity duration-300">Click</span>
+                      </div>
+
+                      <div className="project-body">
+                        <h3>{project.title}</h3>
+                        <p>{project.description}</p>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-2 relative z-10">
+                        {project.stack.map((tag) => (
+                          <div
+                            key={tag}
+                            className="relative px-[10px] py-[6px] border border-[var(--border)] text-[var(--foreground)] opacity-80 bg-white/2 transition-all duration-300 cursor-pointer flex items-center gap-2 outline-none hover:border-[var(--cyan)] hover:opacity-100 hover:-translate-y-[2px] hover:shadow-[0_2px_10px_rgba(125,249,229,0.15)] hover:bg-[rgba(125,249,229,0.05)] group/tile rounded-sm"
+                          >
+                            <span className="font-mono text-[10px] whitespace-nowrap pointer-events-none">{tag}</span>
+                            <div className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300 opacity-0 scale-0 group-hover/tile:opacity-100 group-hover/tile:scale-100 pointer-events-none" />
+                          </div>
+                        ))}
                       </div>
                     </div>
-
-                    <div className="project-body">
-                      <h3>{project.title}</h3>
-                      <p>{project.description}</p>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2 relative z-10">
-                      {project.stack.map((tag) => (
-                        <div
-                          key={tag}
-                          className="relative px-[10px] py-[6px] border border-[var(--border)] text-[var(--foreground)] opacity-80 bg-white/2 transition-all duration-300 cursor-pointer flex items-center gap-2 outline-none hover:border-[var(--cyan)] hover:opacity-100 hover:-translate-y-[2px] hover:shadow-[0_2px_10px_rgba(125,249,229,0.15)] hover:bg-[rgba(125,249,229,0.05)] group/tile rounded-sm"
-                        >
-                          <span className="font-mono text-[10px] whitespace-nowrap pointer-events-none">{tag}</span>
-                          <div className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300 opacity-0 scale-0 group-hover/tile:opacity-100 group-hover/tile:scale-100 pointer-events-none" />
-                        </div>
-                      ))}
-                    </div>
+                    </article>
                   </div>
-                  </article>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </section>
 
           {/* About & Bento Grid Section */}
