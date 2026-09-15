@@ -706,10 +706,10 @@ export default function App() {
 
                 <div className="mt-5 flex flex-col gap-6 relative z-10">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-[10px] py-[7px] bg-[var(--background)] border border-[var(--border)] hover:border-[var(--cyan)] text-[10px] font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] uppercase tracking-wider transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Full-Stack</span>
-                    <span className="px-[10px] py-[7px] bg-[var(--background)] border border-[var(--border)] hover:border-[var(--cyan)] text-[10px] font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] uppercase tracking-wider transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Java + DSA</span>
-                    <span className="px-[10px] py-[7px] bg-[var(--background)] border border-[var(--border)] hover:border-[var(--cyan)] text-[10px] font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] uppercase tracking-wider transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">AI / ML</span>
-                    <span className="px-[10px] py-[7px] bg-[var(--background)] border border-[var(--border)] hover:border-[var(--cyan)] text-[10px] font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] uppercase tracking-wider transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Product Building</span>
+                    <span className="px-[10px] py-[7px] bg-white/2 border border-[var(--border)] hover:border-[var(--cyan)] text-[10px] font-mono text-[var(--foreground)] transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Full-Stack</span>
+                    <span className="px-[10px] py-[7px] bg-white/2 border border-[var(--border)] hover:border-[var(--cyan)] text-[10px] font-mono text-[var(--foreground)] transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Java + DSA</span>
+                    <span className="px-[10px] py-[7px] bg-white/2 border border-[var(--border)] hover:border-[var(--cyan)] text-[10px] font-mono text-[var(--foreground)] transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">AI / ML</span>
+                    <span className="px-[10px] py-[7px] bg-white/2 border border-[var(--border)] hover:border-[var(--cyan)] text-[10px] font-mono text-[var(--foreground)] transition-all duration-300 cursor-default hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(125,249,229,0.15)]">Product Building</span>
                   </div>
 
                   <button
