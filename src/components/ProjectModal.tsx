@@ -105,15 +105,15 @@ export function ProjectModal({
                 <>
                   <div className="flex items-start gap-2">
                     <CheckCircle size={15} className="text-[var(--cyan)] mt-0.5 shrink-0" />
-                    <span>Full MERN stack architecture with JWT authentication and granular category spending limits.</span>
+                    <span>Full-stack MERN architecture with secure authentication and granular category spending limits.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle size={15} className="text-[var(--cyan)] mt-0.5 shrink-0" />
-                    <span>Interactive data visualizations for monthly cash-flow trends, recurring bills, and savings rate.</span>
+                    <span>Interactive data visualizations for cashflow trends, recurring bills, savings goals, and spending patterns.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle size={15} className="text-[var(--cyan)] mt-0.5 shrink-0" />
-                    <span>Optimized MongoDB aggregations ensuring sub-50ms analytics query latency on large datasets.</span>
+                    <span>MongoDB-backed financial data processing with optimized analytics and aggregation workflows.</span>
                   </div>
                 </>
               )}

@@ -93,7 +93,7 @@ const projects: ProjectData[] = [
     title: 'LedgerXL',
     type: 'FULL-STACK / MERN',
     description:
-      'A full-stack personal finance platform for tracking transactions, managing budgets and savings goals, monitoring recurring bills, and gaining actionable financial insights through interactive analytics.',
+      'A full-stack personal finance platform for transaction tracking, budget management, savings goals, recurring bills, and interactive financial analytics.',
     stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Recharts'],
     visual: 'expense',
     image: '/ledgerxl.png',
