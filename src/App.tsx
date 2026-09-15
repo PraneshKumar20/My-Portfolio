@@ -818,7 +818,7 @@ export default function App() {
                 <p>Professional credentials and milestones.</p>
               </div>
 
-              <div className="flex flex-col gap-0">
+              <div className="flex flex-col gap-0 border-b border-[var(--border)]">
                 {credentials.map((cred) => (
                   <div
                     key={cred.id}

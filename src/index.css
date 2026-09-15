@@ -581,16 +581,10 @@ h2 em,
 
 /* Sections */
 .work,
-.about {
-  padding-top: 100px;
-  padding-bottom: 130px;
-  position: relative;
-  z-index: 1;
-}
-
+.about,
 .journey {
   padding-top: 100px;
-  padding-bottom: 40px;
+  padding-bottom: 130px;
   position: relative;
   z-index: 1;
 }
@@ -1192,8 +1186,7 @@ h2 em,
 
 /* Footer */
 .footer {
-  border-top: 1px solid var(--border);
-  padding-top: 60px;
+  padding-top: 100px;
   padding-bottom: 35px;
   position: relative;
 }
