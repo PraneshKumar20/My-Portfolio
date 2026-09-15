@@ -691,19 +691,40 @@ export default function App() {
             </div>
 
             <div className="bento-grid">
-              <div className="bento-card intro-card reveal" data-tilt>
-                <span className="card-label">A LITTLE ABOUT ME</span>
-                <p>
-                  I care about the details that make software feel effortless. From a secure API to
-                  a single well-placed transition, I like building work that is useful, clear, and
-                  quietly memorable.
-                </p>
-                <button
-                  onClick={() => setShowContactModal(true)}
-                  className="text-link bg-transparent border-0 cursor-pointer text-left p-0"
-                >
-                  Get to know me <span>↗</span>
-                </button>
+              <div className="bento-card intro-card reveal flex flex-col justify-between" data-tilt>
+                <div className="space-y-6 relative z-10">
+                  <span className="card-label">A LITTLE ABOUT ME</span>
+                  <div className="space-y-4 mt-2">
+                    <h3 className="text-xl lg:text-[23px] font-medium leading-[1.3] tracking-tight text-[var(--foreground)]">
+                      I’m Pranesh — a Computer Science Engineering student who enjoys turning ideas into practical, polished software.
+                    </h3>
+                    <p className="text-[13px] md:text-[14px] leading-[1.6] text-[var(--muted-foreground)]">
+                      I work across frontend development, full-stack applications, and problem solving with Java and DSA. I like understanding how things work under the hood and then turning that understanding into useful products.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-col gap-6 relative z-10">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">Full-Stack</span>
+                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">Java + DSA</span>
+                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">AI / ML</span>
+                    <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">Product Building</span>
+                  </div>
+
+                  <button
+                    onClick={() => setShowContactModal(true)}
+                    className="text-link bg-transparent border-0 cursor-pointer text-left p-0 w-fit group flex items-center gap-1.5"
+                  >
+                    Explore my work <span className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+                  </button>
+                </div>
+                
+                {/* Subtle technical decorative element replacing any old floating elements */}
+                <div className="absolute top-8 right-8 flex items-center justify-center opacity-30 pointer-events-none">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[var(--cyan)]"></div>
+                  <div className="absolute w-4 h-4 border border-[var(--cyan)] rounded-full animate-ping opacity-20"></div>
+                </div>
               </div>
 
               <div

@@ -1029,15 +1029,7 @@ h2 em,
 
 .intro-card {
   grid-row: span 2;
-  background: linear-gradient(140deg, #171621, #101014);
-}
-
-.intro-card p {
-  font-size: 25px;
-  line-height: 1.18;
-  letter-spacing: -0.04em;
-  max-width: 330px;
-  color: var(--foreground);
+  background: linear-gradient(140deg, var(--card), var(--background));
 }
 
 .text-link {
