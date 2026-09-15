@@ -70,12 +70,13 @@ export function ProjectModal({
             </div>
             <div className="flex flex-wrap gap-2">
               {project.stack.map((item) => (
-                <span
+                <div
                   key={item}
-                  className="px-3 py-1.5 bg-[var(--card)] border border-[var(--border)] font-mono text-xs text-[var(--foreground)] rounded"
+                  className="relative px-[10px] py-[7px] border border-[var(--border)] text-[var(--foreground)] opacity-80 bg-[var(--card)] transition-all duration-300 cursor-default flex items-center gap-2 outline-none hover:border-[var(--cyan)] hover:opacity-100 hover:-translate-y-[2px] hover:shadow-[0_2px_10px_rgba(125,249,229,0.15)] hover:bg-[rgba(125,249,229,0.05)] group/tile rounded-sm"
                 >
-                  {item}
-                </span>
+                  <span className="font-mono text-xs whitespace-nowrap">{item}</span>
+                  <div className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300 opacity-0 scale-0 group-hover/tile:opacity-100 group-hover/tile:scale-100" />
+                </div>
               ))}
             </div>
           </div>

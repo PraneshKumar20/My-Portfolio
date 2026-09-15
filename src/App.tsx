@@ -797,9 +797,15 @@ export default function App() {
                       <p>{project.description}</p>
                     </div>
 
-                    <div className="tag-row">
+                    <div className="flex flex-wrap items-center gap-2 relative z-10">
                       {project.stack.map((tag) => (
-                        <span key={tag}>{tag}</span>
+                        <div
+                          key={tag}
+                          className="relative px-[10px] py-[6px] border border-[var(--border)] text-[var(--foreground)] opacity-80 bg-white/2 transition-all duration-300 cursor-pointer flex items-center gap-2 outline-none hover:border-[var(--cyan)] hover:opacity-100 hover:-translate-y-[2px] hover:shadow-[0_2px_10px_rgba(125,249,229,0.15)] hover:bg-[rgba(125,249,229,0.05)] group/tile rounded-sm"
+                        >
+                          <span className="font-mono text-[10px] whitespace-nowrap pointer-events-none">{tag}</span>
+                          <div className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300 opacity-0 scale-0 group-hover/tile:opacity-100 group-hover/tile:scale-100 pointer-events-none" />
+                        </div>
                       ))}
                     </div>
                   </div>
