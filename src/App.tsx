@@ -822,7 +822,7 @@ export default function App() {
                 {credentials.map((cred) => (
                   <div
                     key={cred.id}
-                    className="cert-card flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-[var(--border)] cursor-pointer group hover:bg-[var(--card)] px-4 -mx-4 transition-colors"
+                    className="cert-card flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b last:border-b-0 border-[var(--border)] cursor-pointer group hover:bg-[var(--card)] px-4 -mx-4 transition-colors"
                     onClick={() => {
                       if (cred.action === 'leetcode') {
                         setShowLeetCodeModal(true);
