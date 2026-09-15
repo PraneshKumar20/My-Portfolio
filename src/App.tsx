@@ -898,11 +898,11 @@ export default function App() {
           {/* Footer & Contact Section */}
           <footer id="contact" className="footer section-pad reveal">
             <div
-              className="footer-orbit cursor-pointer"
+              className="footer-orbit cursor-pointer group"
               aria-hidden="true"
               onClick={() => setShowContactModal(true)}
             >
-              ↗
+              <span className="transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-[1.3] group-hover:translate-x-1 group-hover:-translate-y-1 inline-block">↗</span>
             </div>
             <span className="section-index">05 / CONTACT</span>
             <h2>

@@ -1210,15 +1210,62 @@ h2 em,
   right: 8%;
   top: 110px;
   color: var(--cyan);
-  border: 1px solid var(--cyan);
+  border: 1px solid rgba(125, 249, 229, 0.5);
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 38px;
   transform: rotate(15deg);
   animation: orbit-float 6s infinite ease-in-out alternate;
+  background: rgba(125, 249, 229, 0.03);
+  backdrop-filter: blur(4px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.footer-orbit:hover {
+  background: rgba(125, 249, 229, 0.1);
+  border-color: var(--cyan);
+  box-shadow: 0 0 30px rgba(125, 249, 229, 0.2), inset 0 0 15px rgba(125, 249, 229, 0.1);
+  text-shadow: 0 0 10px rgba(125, 249, 229, 0.5);
+}
+
+/* Satellite Ring */
+.footer-orbit::before {
+  content: "";
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(125, 249, 229, 0.4);
+  border-radius: 50%;
+  bottom: -3px;
+  left: -3px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Satellite Dot */
+.footer-orbit::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--cyan);
+  border-radius: 50%;
+  bottom: 10px;
+  left: 10px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.footer-orbit:hover::before {
+  transform: scale(1.4);
+  border-color: rgba(125, 249, 229, 0.8);
+}
+
+.footer-orbit:hover::after {
+  box-shadow: 0 0 15px var(--cyan);
+  transform: scale(1.2);
 }
 
 @keyframes orbit-float {
