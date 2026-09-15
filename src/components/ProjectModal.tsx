@@ -90,15 +90,15 @@ export function ProjectModal({
                 <>
                   <div className="flex items-start gap-2">
                     <CheckCircle size={15} className="text-[var(--cyan)] mt-0.5 shrink-0" />
-                    <span>Real-time computer vision face contour analysis for customized hairstyle recommendations.</span>
+                    <span>Face-shape analysis with personalized hairstyle recommendations based on facial features.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle size={15} className="text-[var(--cyan)] mt-0.5 shrink-0" />
-                    <span>Salon geolocation indexing with live appointment slot reservations and wait-time estimations.</span>
+                    <span>Location-aware salon discovery with mapped recommendations and appointment-oriented browsing.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle size={15} className="text-[var(--cyan)] mt-0.5 shrink-0" />
-                    <span>Responsive interface designed with intuitive gesture support and low-latency rendering.</span>
+                    <span>Responsive React interface with interactive discovery flows and optimized client-side interactions.</span>
                   </div>
                 </>
               ) : (

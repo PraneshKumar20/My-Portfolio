@@ -81,8 +81,8 @@ const projects: ProjectData[] = [
     title: 'Hairloon',
     type: 'ML / PRODUCT DESIGN',
     description:
-      'A salon discovery and hairstyle recommendation platform that turns face-shape analysis into a confident next move.',
-    stack: ['JavaScript', 'Machine Learning', 'Geolocation', 'TailwindCSS'],
+      'A salon discovery and hairstyle recommendation platform that turns face-shape analysis into personalized style recommendations.',
+    stack: ['React', 'JavaScript', 'Machine Learning', 'Geolocation', 'TailwindCSS'],
     visual: 'hairloon',
     image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-z4khcCQSEa5BKd1wDnsNSERghTSJyM.png',
     githubUrl: 'https://github.com/PraneshKumar20/Hairloon',
