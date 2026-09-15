@@ -830,6 +830,7 @@ export default function App() {
             <div className="mt-24 reveal">
               <div className="section-heading mb-12">
                 <div>
+                  <span className="section-index">04 /</span>
                   <h2>
                     Certifications
                     <br />
@@ -903,7 +904,7 @@ export default function App() {
             >
               ↗
             </div>
-            <span className="section-index">04 / CONTACT</span>
+            <span className="section-index">05 / CONTACT</span>
             <h2>
               Have a good
               <br />
