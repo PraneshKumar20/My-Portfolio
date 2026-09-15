@@ -173,27 +173,27 @@ const InteractiveToolkitCard = () => {
   return (
     <div 
       ref={cardRef}
-      className="bento-card skills-card reveal flex flex-col justify-start gap-5 group relative overflow-hidden" 
+      className="bento-card skills-card reveal flex flex-col justify-start gap-6 group relative overflow-hidden" 
       data-tilt
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ '--mouse-x': '0.5', '--mouse-y': '0.5' } as React.CSSProperties}
     >
       <div className="absolute inset-0 pointer-events-none opacity-40 transition-opacity duration-700 group-hover:opacity-100 motion-reduce:hidden">
-        <div className="absolute top-[20%] left-[15%] w-1 h-1 bg-[var(--cyan)] rounded-full shadow-[0_0_8px_var(--cyan)] transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -30px), calc((var(--mouse-y) - 0.5) * -30px))' }} />
-        <div className="absolute top-[45%] left-[85%] w-1 h-1 bg-[var(--purple)] rounded-full shadow-[0_0_8px_var(--purple)] opacity-70 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 30px), calc((var(--mouse-y) - 0.5) * 30px))' }} />
-        <div className="absolute top-[80%] left-[20%] w-0.5 h-0.5 bg-[var(--foreground)] rounded-full transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * 25px))' }} />
-        <div className="absolute top-[30%] left-[75%] w-1 h-1 bg-[var(--cyan)] rounded-full opacity-40 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * -40px))' }} />
+        <div className="absolute top-[15%] left-[10%] w-1 h-1 bg-[var(--cyan)] rounded-full shadow-[0_0_8px_var(--cyan)] transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -30px), calc((var(--mouse-y) - 0.5) * -30px))' }} />
+        <div className="absolute top-[40%] left-[90%] w-1 h-1 bg-[var(--purple)] rounded-full shadow-[0_0_8px_var(--purple)] opacity-70 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 30px), calc((var(--mouse-y) - 0.5) * 30px))' }} />
+        <div className="absolute top-[75%] left-[15%] w-0.5 h-0.5 bg-[var(--foreground)] rounded-full transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * 25px))' }} />
+        <div className="absolute top-[25%] left-[80%] w-1 h-1 bg-[var(--cyan)] rounded-full opacity-40 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * -40px))' }} />
         
-        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
-           <path d="M 0,50 Q 150,200 350,50" fill="none" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="2 6" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * -15px))' }} />
-           <path d="M 350,250 Q 200,-50 0,250" fill="none" stroke="var(--purple)" strokeWidth="0.5" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 15px), calc((var(--mouse-y) - 0.5) * 15px))' }} />
+        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+           <path d="M 0,30 Q 150,150 400,20" fill="none" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="2 6" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * -15px))' }} />
+           <path d="M 400,180 Q 200,-20 -50,180" fill="none" stroke="var(--purple)" strokeWidth="0.5" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 15px), calc((var(--mouse-y) - 0.5) * 15px))' }} />
         </svg>
       </div>
 
       <span className="card-label relative z-10">THE TOOLKIT</span>
       
-      <div className="flex flex-col gap-4 relative z-10 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-7 relative z-10 w-full">
         {toolkitCategories.map((category) => {
           const isCategoryHovered = hoveredCategory === category.name;
           const isOtherCategoryHovered = hoveredCategory !== null && hoveredCategory !== category.name;
@@ -201,7 +201,7 @@ const InteractiveToolkitCard = () => {
           return (
             <div 
               key={category.name}
-              className={`flex flex-col gap-2.5 transition-all duration-500
+              className={`flex flex-col gap-3 transition-all duration-500
                 ${isOtherCategoryHovered ? 'opacity-50' : 'opacity-100'}
               `}
               onMouseEnter={() => setHoveredCategory(category.name)}
