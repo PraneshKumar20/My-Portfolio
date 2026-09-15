@@ -129,6 +129,102 @@ const skills = [
   'Tailwind CSS',
 ];
 
+const toolkitSkills = [
+  { name: 'Java', type: 'CORE' },
+  { name: 'JavaScript', type: '' },
+  { name: 'React.js', type: 'FRONTEND' },
+  { name: 'Node.js', type: '' },
+  { name: 'Express.js', type: '' },
+  { name: 'MongoDB', type: 'DATABASE' },
+  { name: 'MySQL', type: '' },
+  { name: 'DSA', type: 'PROBLEM SOLVING' },
+  { name: 'OOP', type: '' },
+  { name: 'Git', type: '' },
+  { name: 'REST APIs', type: '' },
+  { name: 'Tailwind CSS', type: '' },
+];
+
+const InteractiveToolkitCard = () => {
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    cardRef.current.style.setProperty('--mouse-x', `${x}`);
+    cardRef.current.style.setProperty('--mouse-y', `${y}`);
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.setProperty('--mouse-x', '0.5');
+    cardRef.current.style.setProperty('--mouse-y', '0.5');
+    setHoveredSkill(null);
+  };
+
+  return (
+    <div 
+      ref={cardRef}
+      className="bento-card skills-card reveal flex flex-col justify-start gap-10 group relative overflow-hidden" 
+      data-tilt
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ '--mouse-x': '0.5', '--mouse-y': '0.5' } as React.CSSProperties}
+    >
+      <div className="absolute inset-0 pointer-events-none opacity-40 transition-opacity duration-700 group-hover:opacity-100 motion-reduce:hidden">
+        <div className="absolute top-[20%] left-[15%] w-1 h-1 bg-[var(--cyan)] rounded-full shadow-[0_0_8px_var(--cyan)] transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -30px), calc((var(--mouse-y) - 0.5) * -30px))' }} />
+        <div className="absolute top-[70%] left-[80%] w-1.5 h-1.5 bg-[var(--purple)] rounded-full shadow-[0_0_8px_var(--purple)] transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 40px), calc((var(--mouse-y) - 0.5) * 40px))' }} />
+        <div className="absolute top-[80%] left-[20%] w-0.5 h-0.5 bg-[var(--foreground)] rounded-full transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * 25px))' }} />
+        <div className="absolute top-[30%] left-[75%] w-1 h-1 bg-[var(--cyan)] rounded-full opacity-50 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * -40px))' }} />
+        
+        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+           <path d="M 0,50 Q 150,200 350,50" fill="none" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="2 6" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * -15px))' }} />
+           <path d="M 350,250 Q 200,-50 0,250" fill="none" stroke="var(--purple)" strokeWidth="0.5" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * 20px))' }} />
+        </svg>
+      </div>
+
+      <span className="card-label relative z-10">THE TOOLKIT</span>
+      
+      <div className="flex flex-wrap items-center gap-2 relative z-10">
+        {toolkitSkills.map((skill) => {
+          const isHovered = hoveredSkill === skill.name;
+          const isOtherHovered = hoveredSkill !== null && hoveredSkill !== skill.name;
+          
+          return (
+            <div
+              key={skill.name}
+              className={`relative px-[10px] py-[7px] border transition-all duration-300 cursor-default flex items-center gap-2 outline-none
+                ${isHovered ? 'border-[var(--cyan)] text-[var(--foreground)] -translate-y-1 shadow-[0_4px_15px_rgba(125,249,229,0.15)] bg-white/5' : 'border-[var(--border)] text-[var(--muted-foreground)] bg-white/2'}
+                ${isOtherHovered ? 'opacity-30 scale-[0.98]' : 'opacity-100 scale-100'}
+              `}
+              onMouseEnter={() => setHoveredSkill(skill.name)}
+              onFocus={() => setHoveredSkill(skill.name)}
+              onBlur={() => setHoveredSkill(null)}
+              tabIndex={0}
+              role="button"
+              aria-label={skill.name}
+            >
+              <span className="font-mono text-[10px] whitespace-nowrap">{skill.name}</span>
+              {skill.type && (
+                <span className={`font-mono text-[7px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm border transition-all duration-300 whitespace-nowrap
+                  ${isHovered ? 'opacity-100 border-[var(--cyan)] text-[var(--cyan)] bg-[var(--cyan)]/10 ml-1' : 'opacity-0 w-0 h-0 overflow-hidden absolute pointer-events-none m-0 p-0'}
+                `}>
+                  {skill.type}
+                </span>
+              )}
+              <div className={`absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300
+                ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+              `} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const rootRef = useRef<HTMLElement>(null);
   const [activeProject, setActiveProject] = useState<ProjectData | null>(null);
@@ -757,14 +853,7 @@ export default function App() {
                 <span className="coordinates">11.0168° N / 76.9558° E</span>
               </div>
 
-              <div className="bento-card skills-card reveal flex flex-col justify-start gap-10" data-tilt>
-                <span className="card-label">THE TOOLKIT</span>
-                <div className="skill-cloud">
-                  {skills.map((skill) => (
-                    <span key={skill}>{skill}</span>
-                  ))}
-                </div>
-              </div>
+              <InteractiveToolkitCard />
             </div>
           </section>
 
