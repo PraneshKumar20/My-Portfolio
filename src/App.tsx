@@ -129,23 +129,28 @@ const skills = [
   'Tailwind CSS',
 ];
 
-const toolkitSkills = [
-  { name: 'Java', type: 'CORE' },
-  { name: 'JavaScript', type: '' },
-  { name: 'React.js', type: 'FRONTEND' },
-  { name: 'Node.js', type: '' },
-  { name: 'Express.js', type: '' },
-  { name: 'MongoDB', type: 'DATABASE' },
-  { name: 'MySQL', type: '' },
-  { name: 'DSA', type: 'PROBLEM SOLVING' },
-  { name: 'OOP', type: '' },
-  { name: 'Git', type: '' },
-  { name: 'REST APIs', type: '' },
-  { name: 'Tailwind CSS', type: '' },
+const toolkitCategories = [
+  {
+    name: 'FRONTEND',
+    skills: ['React.js', 'JavaScript', 'Tailwind CSS']
+  },
+  {
+    name: 'BACKEND',
+    skills: ['Node.js', 'Express.js', 'REST APIs']
+  },
+  {
+    name: 'DATA & CORE',
+    skills: ['MongoDB', 'MySQL', 'Java', 'DSA', 'OOP']
+  },
+  {
+    name: 'TOOLS',
+    skills: ['Git']
+  }
 ];
 
 const InteractiveToolkitCard = () => {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -162,12 +167,13 @@ const InteractiveToolkitCard = () => {
     cardRef.current.style.setProperty('--mouse-x', '0.5');
     cardRef.current.style.setProperty('--mouse-y', '0.5');
     setHoveredSkill(null);
+    setHoveredCategory(null);
   };
 
   return (
     <div 
       ref={cardRef}
-      className="bento-card skills-card reveal flex flex-col justify-start gap-10 group relative overflow-hidden" 
+      className="bento-card skills-card reveal flex flex-col justify-start gap-8 group relative overflow-hidden" 
       data-tilt
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -187,36 +193,67 @@ const InteractiveToolkitCard = () => {
 
       <span className="card-label relative z-10">THE TOOLKIT</span>
       
-      <div className="flex flex-wrap items-center gap-2 relative z-10">
-        {toolkitSkills.map((skill) => {
-          const isHovered = hoveredSkill === skill.name;
-          const isOtherHovered = hoveredSkill !== null && hoveredSkill !== skill.name;
+      <div className="flex flex-col gap-6 relative z-10 w-full">
+        {toolkitCategories.map((category) => {
+          const isCategoryHovered = hoveredCategory === category.name;
+          const isOtherCategoryHovered = hoveredCategory !== null && hoveredCategory !== category.name;
           
           return (
-            <div
-              key={skill.name}
-              className={`relative px-[10px] py-[7px] border transition-all duration-300 cursor-default flex items-center gap-2 outline-none
-                ${isHovered ? 'border-[var(--cyan)] text-[var(--foreground)] -translate-y-1 shadow-[0_4px_15px_rgba(125,249,229,0.15)] bg-white/5' : 'border-[var(--border)] text-[var(--muted-foreground)] bg-white/2'}
-                ${isOtherHovered ? 'opacity-30 scale-[0.98]' : 'opacity-100 scale-100'}
+            <div 
+              key={category.name}
+              className={`flex flex-col gap-3 transition-all duration-500
+                ${isOtherCategoryHovered ? 'opacity-30' : 'opacity-100'}
               `}
-              onMouseEnter={() => setHoveredSkill(skill.name)}
-              onFocus={() => setHoveredSkill(skill.name)}
-              onBlur={() => setHoveredSkill(null)}
+              onMouseEnter={() => setHoveredCategory(category.name)}
+              onFocus={() => setHoveredCategory(category.name)}
+              onBlur={() => setHoveredCategory(null)}
               tabIndex={0}
-              role="button"
-              aria-label={skill.name}
             >
-              <span className="font-mono text-[10px] whitespace-nowrap">{skill.name}</span>
-              {skill.type && (
-                <span className={`font-mono text-[7px] uppercase tracking-wider px-1.5 py-0.5 rounded-sm border transition-all duration-300 whitespace-nowrap
-                  ${isHovered ? 'opacity-100 border-[var(--cyan)] text-[var(--cyan)] bg-[var(--cyan)]/10 ml-1' : 'opacity-0 w-0 h-0 overflow-hidden absolute pointer-events-none m-0 p-0'}
+              <div className="flex items-center gap-3">
+                <span className={`font-mono text-[9px] uppercase tracking-widest transition-colors duration-300
+                  ${isCategoryHovered ? 'text-[var(--cyan)]' : 'text-[var(--muted-foreground)] opacity-70'}
                 `}>
-                  {skill.type}
+                  {category.name}
                 </span>
-              )}
-              <div className={`absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300
-                ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
-              `} />
+                <div className={`h-[1px] flex-grow transition-colors duration-300
+                  ${isCategoryHovered ? 'bg-[var(--cyan)]/20' : 'bg-[var(--border)]/50'}
+                `} />
+              </div>
+              
+              <div className="flex flex-wrap items-center gap-2">
+                {category.skills.map((skill) => {
+                  const isSkillHovered = hoveredSkill === skill;
+                  const isOtherSkillHovered = hoveredSkill !== null && hoveredSkill !== skill;
+                  
+                  return (
+                    <div
+                      key={skill}
+                      className={`relative px-[10px] py-[7px] border transition-all duration-300 cursor-default flex items-center gap-2 outline-none
+                        ${isSkillHovered ? 'border-[var(--cyan)] text-[var(--foreground)] -translate-y-1 shadow-[0_4px_15px_rgba(125,249,229,0.15)] bg-white/5' : 'border-[var(--border)] text-[var(--muted-foreground)] bg-white/2'}
+                        ${isCategoryHovered && !isSkillHovered ? 'border-[var(--cyan)]/30 text-[var(--foreground)] bg-white/5' : ''}
+                        ${isOtherSkillHovered ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}
+                      `}
+                      onMouseEnter={() => {
+                        setHoveredSkill(skill);
+                        setHoveredCategory(category.name);
+                      }}
+                      onFocus={() => {
+                        setHoveredSkill(skill);
+                        setHoveredCategory(category.name);
+                      }}
+                      onBlur={() => setHoveredSkill(null)}
+                      tabIndex={0}
+                      role="button"
+                      aria-label={skill}
+                    >
+                      <span className="font-mono text-[10px] whitespace-nowrap">{skill}</span>
+                      <div className={`absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300
+                        ${isSkillHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+                      `} />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           );
         })}
