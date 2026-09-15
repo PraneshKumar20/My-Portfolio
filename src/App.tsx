@@ -699,12 +699,12 @@ export default function App() {
                       I’m Pranesh — a Computer Science Engineering student who enjoys turning ideas into practical, polished software.
                     </h3>
                     <p className="text-[13px] md:text-[14px] leading-[1.6] text-[var(--muted-foreground)]">
-                      I work across frontend development, full-stack applications, and problem solving with Java and DSA. I like understanding how things work under the hood and then turning that understanding into useful products.
+                      I work across frontend development, full-stack applications, and problem solving with Java and DSA. I enjoy understanding how systems work under the hood and turning that understanding into practical, polished products.
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-8 flex flex-col gap-6 relative z-10">
+                <div className="mt-5 flex flex-col gap-6 relative z-10">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">Full-Stack</span>
                     <span className="px-2 py-1 bg-[var(--background)] border border-[var(--border)] text-[9.5px] font-mono text-[var(--muted-foreground)] uppercase tracking-wider rounded-sm">Java + DSA</span>
@@ -757,7 +757,7 @@ export default function App() {
                 <span className="coordinates">11.0168° N / 76.9558° E</span>
               </div>
 
-              <div className="bento-card skills-card reveal" data-tilt>
+              <div className="bento-card skills-card reveal flex flex-col justify-start gap-10" data-tilt>
                 <span className="card-label">THE TOOLKIT</span>
                 <div className="skill-cloud">
                   {skills.map((skill) => (
