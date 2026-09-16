@@ -1,6 +1,6 @@
 # Pranesh Kumar R — Developer Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-my--portfolio-7df9e5?style=for-the-badge&logo=vercel&logoColor=040714)](https://my-portfolio-psi-six-23.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-my--portfolio-7df9e5?style=for-the-badge&logo=vercel&logoColor=040714)](https://praneshkumar.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-PraneshKumar20-a58bff?style=for-the-badge&logo=github&logoColor=white)](https://github.com/PraneshKumar20)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Raju%20Pranesh%20Kumar-0ea5e9?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raju-pranesh-kumar)
 [![LeetCode](https://img.shields.io/badge/LeetCode-300%2B%20Problems-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/u/praneshkumar20/)
