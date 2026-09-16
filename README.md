@@ -7,7 +7,7 @@
 
 A modern, highly interactive personal portfolio built with **React**, **Three.js**, **GSAP**, and **Tailwind CSS**. Designed with rich aesthetics, fluid 3D interactions, dynamic spotlight effects, and smooth page transitions.
 
-🌐 **Live URL:** [https://my-portfolio-psi-six-23.vercel.app/](https://my-portfolio-psi-six-23.vercel.app/)
+🌐 **Live URL:** [https://my-portfolio-psi-six-23.vercel.app/](https://praneshkumar.vercel.app/)
 
 ---
 
