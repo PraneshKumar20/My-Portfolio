@@ -202,9 +202,13 @@ const InteractiveToolkitCard: React.FC<InteractiveToolkitCardProps> = ({ activeF
         <div className="absolute top-[75%] left-[15%] w-0.5 h-0.5 bg-[var(--foreground)] rounded-full transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * 25px))' }} />
         <div className="absolute top-[25%] left-[80%] w-1 h-1 bg-[var(--cyan)] rounded-full opacity-40 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * -40px))' }} />
         
-        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
-           <path d="M 0,30 Q 150,150 400,20" fill="none" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="2 6" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * -15px), calc((var(--mouse-y) - 0.5) * -15px))' }} />
-           <path d="M 400,180 Q 200,-20 -50,180" fill="none" stroke="var(--purple)" strokeWidth="0.5" className="transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 15px), calc((var(--mouse-y) - 0.5) * 15px))' }} />
+        <svg className="absolute inset-0 w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="none">
+           <path d="M 100 75 Q 200 50 300 75 T 300 225 Q 200 250 100 225 T 100 75" fill="none" stroke="var(--cyan)" strokeWidth="1.5" strokeDasharray="4 6" />
+           <path d="M 100 75 L 300 225" fill="none" stroke="var(--purple)" strokeWidth="1.5" strokeDasharray="2 6" />
+           <circle cx="100" cy="75" r="4" fill="var(--cyan)" />
+           <circle cx="300" cy="75" r="4" fill="var(--cyan)" />
+           <circle cx="100" cy="225" r="4" fill="var(--purple)" />
+           <circle cx="300" cy="225" r="4" fill="var(--purple)" />
         </svg>
       </div>
 
@@ -631,6 +635,13 @@ export default function App() {
       <CustomCursor />
       <PageTransition>
         <main ref={rootRef} className="site-shell">
+          {/* Global Orbital Arcs */}
+          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden hidden md:block" aria-hidden="true">
+            <div className="absolute top-[-50vh] left-[-20vw] w-[150vw] h-[150vw] rounded-full border-[1px] border-[var(--cyan)] opacity-[0.03]" />
+            <div className="absolute bottom-[-60vh] right-[-30vw] w-[180vw] h-[180vw] rounded-full border-[1px] border-[var(--purple)] opacity-[0.02]" />
+            <div className="absolute top-[20vh] left-[-40vw] w-[200vw] h-[200vw] rounded-full border-[1px] border-[var(--cyan)] opacity-[0.02]" />
+          </div>
+
           {/* Global Scroll Progress Bar */}
           <div className="scroll-progress-bar fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--cyan)] to-[var(--purple)] origin-left scale-x-0 z-[9999] pointer-events-none" />
 
@@ -732,6 +743,9 @@ export default function App() {
               data-portrait
               aria-label="Interactive portrait of Pranesh Kumar"
             >
+              {/* Static Concentric Ring */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] rounded-full border border-[var(--cyan)] opacity-[0.06] pointer-events-none hidden md:block" aria-hidden="true" />
+
               <div className="orbital-ring" aria-hidden="true">
                 <div className="orbital-dot"></div>
               </div>
@@ -769,124 +783,34 @@ export default function App() {
             </div>
           </section>
 
-          {/* Selected Work Section */}
-          <section id="work" className="work section-pad">
-            <div className="section-heading reveal">
-              <div>
-                <span className="section-index">01 /</span>
-                <h2>
-                  Selected
-                  <br />
-                  <em>work</em>
-                </h2>
-              </div>
-              <p>
-                A small selection of things I&apos;ve designed,
-                <br />
-                engineered, and shipped.
-              </p>
-            </div>
-
-            {activeSkillFilter && (
-              <div className="flex items-center justify-between bg-white/5 border border-[var(--border)] px-4 py-3 rounded-md mb-8 reveal">
-                <span className="text-xs text-[var(--muted-foreground)]">
-                  Showing projects using <strong className="text-[var(--cyan)] font-mono font-normal">{activeSkillFilter}</strong>
-                </span>
-                <button 
-                  onClick={() => handleSkillSelect(activeSkillFilter)}
-                  className="text-xs text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--cyan)] transition-colors bg-transparent border-0 cursor-pointer p-0"
-                >
-                  Clear filter
-                </button>
-              </div>
-            )}
-
-            {filteredProjects.length === 0 ? (
-              <div className="w-full py-16 text-center border border-[var(--border)] border-dashed rounded-lg bg-white/2 reveal">
-                <p className="text-[var(--muted-foreground)] text-sm mb-4">No projects currently tagged with this technology.</p>
-                <button 
-                  onClick={() => handleSkillSelect(activeSkillFilter!)} 
-                  className="text-xs text-[var(--foreground)] hover:text-[var(--cyan)] transition-colors bg-transparent border border-[var(--border)] px-4 py-2 rounded cursor-pointer"
-                >
-                  Clear filter
-                </button>
-              </div>
-            ) : (
-              <div className="project-list">
-                {filteredProjects.map((project) => (
-                  <div className="reveal project-card-wrapper" key={project.title}>
-                    <article
-                      className={`project-card ${project.visual}-card group`}
-                      data-tilt
-                      onClick={() => setActiveProject(project)}
-                    >
-                    <div className={`project-visual ${project.visual}`}>
-                      {project.image ? (
-                        <img
-                          className="project-image"
-                          src={project.image}
-                          alt={`${project.title} project interface`}
-                          onError={(e) => {
-                            (e.target as HTMLElement).style.display = 'none';
-                          }}
-                        />
-                      ) : (
-                        <>
-                          <div className="visual-noise" />
-                          <div className="visual-window">
-                            <span />
-                            <span />
-                            <span />
-                          </div>
-                          <div className="visual-mark">
-                            {project.visual === 'hairloon' ? 'H' : '₹'}
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    <div className="project-info">
-                      <div className="project-topline">
-                        <span>
-                          {project.number} — {project.type}
-                        </span>
-                        <div className="relative flex flex-col items-center">
-                          <div className="project-arrow-wrap" aria-hidden="true">
-                            <span className="project-arrow">↗</span>
-                          </div>
-                          <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity duration-300">Click</span>
-                        </div>
-                      </div>
-
-                      <div className="project-body">
-                        <h3>{project.title}</h3>
-                        <p>{project.description}</p>
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-2 relative z-10">
-                        {project.stack.map((tag) => (
-                          <div
-                            key={tag}
-                            className="relative px-[10px] py-[6px] border border-[var(--border)] text-[var(--foreground)] opacity-80 bg-white/2 transition-all duration-300 cursor-pointer flex items-center gap-2 outline-none hover:border-[var(--cyan)] hover:opacity-100 hover:-translate-y-[2px] hover:shadow-[0_2px_10px_rgba(125,249,229,0.15)] hover:bg-[rgba(125,249,229,0.05)] group/tile rounded-sm"
-                          >
-                            <span className="font-mono text-[10px] whitespace-nowrap pointer-events-none">{tag}</span>
-                            <div className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300 opacity-0 scale-0 group-hover/tile:opacity-100 group-hover/tile:scale-100 pointer-events-none" />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    </article>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
+          {/* Trajectory Segment: Hero -> About */}
+          <div className="w-full justify-center hidden md:flex opacity-[0.15] pointer-events-none z-0 relative h-40 items-center">
+            <svg width="100" height="160" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M50 0 L50 60 C50 80, 80 80, 80 100 L80 160" stroke="var(--cyan)" strokeWidth="0.5" strokeDasharray="4 4" />
+               <circle cx="50" cy="0" r="1.5" fill="var(--cyan)" />
+               <circle cx="50" cy="60" r="2" fill="var(--background)" stroke="var(--cyan)" strokeWidth="1" />
+               <circle cx="80" cy="100" r="2" fill="var(--background)" stroke="var(--purple)" strokeWidth="1" />
+               <circle cx="80" cy="160" r="1.5" fill="var(--purple)" />
+            </svg>
+          </div>
 
           {/* About & Bento Grid Section */}
-          <section id="about" className="about section-pad">
-            <div className="section-heading reveal">
+          <section id="about" className="about section-pad relative">
+            {/* Local Constellation Background */}
+            <div className="absolute inset-0 z-0 pointer-events-none hidden md:block overflow-hidden" aria-hidden="true">
+               <svg className="absolute w-[120%] h-[120%] top-[-10%] left-[-10%] opacity-[0.06]" viewBox="0 0 1000 600" fill="none" preserveAspectRatio="xMidYMid slice">
+                 <path d="M200,100 C300,100 400,200 450,350 C500,500 600,550 800,500" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="4 4" />
+                 <path d="M450,350 L550,200 L700,250" stroke="var(--purple)" strokeWidth="0.5" strokeDasharray="4 4" />
+                 <circle cx="200" cy="100" r="3" fill="var(--cyan)" />
+                 <circle cx="450" cy="350" r="4" fill="var(--background)" stroke="var(--cyan)" strokeWidth="1.5" />
+                 <circle cx="550" cy="200" r="2.5" fill="var(--purple)" />
+                 <circle cx="700" cy="250" r="3" fill="var(--purple)" />
+                 <circle cx="800" cy="500" r="3" fill="var(--cyan)" />
+               </svg>
+            </div>
+            <div className="section-heading reveal relative z-10">
               <div>
-                <span className="section-index">02 /</span>
+                <span className="section-index">01 /</span>
                 <h2>
                   More than
                   <br />
@@ -926,11 +850,7 @@ export default function App() {
                   </button>
                 </div>
                 
-                {/* Subtle technical decorative element replacing any old floating elements */}
-                <div className="absolute top-8 right-8 flex items-center justify-center opacity-30 pointer-events-none">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[var(--cyan)]"></div>
-                  <div className="absolute w-4 h-4 border border-[var(--cyan)] rounded-full animate-ping opacity-20"></div>
-                </div>
+                
               </div>
 
               <div
@@ -966,6 +886,160 @@ export default function App() {
               <InteractiveToolkitCard activeFilter={activeSkillFilter} onSkillSelect={handleSkillSelect} />
             </div>
           </section>
+
+          {/* Trajectory Segment: About -> Work */}
+          <div className="w-full justify-center hidden md:flex opacity-[0.15] pointer-events-none z-0 relative h-40 items-center">
+            <svg width="100" height="160" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M80 0 L80 60 C80 80, 50 80, 50 100 L50 160" stroke="var(--cyan)" strokeWidth="0.5" strokeDasharray="4 4" />
+               <circle cx="80" cy="0" r="1.5" fill="var(--purple)" />
+               <circle cx="80" cy="60" r="2" fill="var(--background)" stroke="var(--purple)" strokeWidth="1" />
+               <circle cx="50" cy="100" r="2" fill="var(--background)" stroke="var(--cyan)" strokeWidth="1" />
+               <circle cx="50" cy="160" r="1.5" fill="var(--cyan)" />
+            </svg>
+          </div>
+
+          {/* Selected Work Section */}
+          <section id="work" className="work section-pad">
+            <div className="section-heading reveal">
+              <div>
+                <span className="section-index">02 /</span>
+                <h2>
+                  Selected
+                  <br />
+                  <em>work</em>
+                </h2>
+              </div>
+              <p>
+                A small selection of things I&apos;ve designed,
+                <br />
+                engineered, and shipped.
+              </p>
+            </div>
+
+            {activeSkillFilter && (
+              <div className="flex items-center justify-between bg-white/5 border border-[var(--border)] px-4 py-3 rounded-md mb-8 reveal">
+                <span className="text-xs text-[var(--muted-foreground)]">
+                  Showing projects using <strong className="text-[var(--cyan)] font-mono font-normal">{activeSkillFilter}</strong>
+                </span>
+                <button 
+                  onClick={() => handleSkillSelect(activeSkillFilter)}
+                  className="text-xs text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--cyan)] transition-colors bg-transparent border-0 cursor-pointer p-0"
+                >
+                  Clear filter
+                </button>
+              </div>
+            )}
+
+            {filteredProjects.length === 0 ? (
+              <div className="w-full py-16 text-center border border-[var(--border)] border-dashed rounded-lg bg-white/2 reveal">
+                <p className="text-[var(--muted-foreground)] text-sm mb-4">No projects currently tagged with this technology.</p>
+                <button 
+                  onClick={() => handleSkillSelect(activeSkillFilter!)} 
+                  className="text-xs text-[var(--foreground)] hover:text-[var(--cyan)] transition-colors bg-transparent border border-[var(--border)] px-4 py-2 rounded cursor-pointer"
+                >
+                  Clear filter
+                </button>
+              </div>
+            ) : (
+              <div className="project-list relative">
+                {filteredProjects.map((project, index) => (
+                  <div className="reveal project-card-wrapper relative z-10" key={project.title}>
+                    {/* Waypoint Entry Trajectory */}
+                    {index === 0 && (
+                      <div className="absolute top-[-64px] right-[20%] w-[100px] h-[64px] opacity-[0.15] pointer-events-none hidden lg:block z-[-1]">
+                        <svg width="100" height="64" viewBox="0 0 100 64" fill="none">
+                          <path d="M100 0 C50 0, 0 32, 0 64" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="4 6" />
+                        </svg>
+                      </div>
+                    )}
+                    {/* Inter-project Trajectory */}
+                    {index === 1 && (
+                      <div className="absolute top-[-64px] left-[15%] w-[150px] h-[64px] opacity-[0.15] pointer-events-none hidden lg:block z-[-1]">
+                        <svg width="150" height="64" viewBox="0 0 150 64" fill="none">
+                          <path d="M0 0 C50 32, 100 32, 150 64" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="4 6" />
+                          <circle cx="75" cy="32" r="2.5" fill="var(--background)" stroke="var(--purple)" strokeWidth="1" />
+                        </svg>
+                      </div>
+                    )}
+                    <article
+                      className={`project-card ${project.visual}-card group`}
+                      data-tilt
+                      onClick={() => setActiveProject(project)}
+                    >
+                    <div className={`project-visual ${project.visual}`}>
+                      {project.image ? (
+                        <img
+                          className="project-image"
+                          src={project.image}
+                          alt={`${project.title} project interface`}
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <>
+                          <div className="visual-noise" />
+                          <div className="visual-window">
+                            <span />
+                            <span />
+                            <span />
+                          </div>
+                          <div className="visual-mark">
+                            {project.visual === 'hairloon' ? 'H' : '₹'}
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="project-info">
+                      <div className="project-topline">
+                        <span className="flex items-center gap-3">
+                          <span className="relative flex items-center justify-center w-5 h-5">
+                            <span className="absolute w-full h-full rounded-full border border-[var(--cyan)] opacity-30"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] inline-block"></span>
+                          </span>
+                          <span className="font-mono text-[var(--cyan)] tracking-widest">{project.number}</span> <span className="opacity-50">—</span> {project.type}
+                        </span>
+                        <div className="relative flex flex-col items-center">
+                          <div className="project-arrow-wrap" aria-hidden="true">
+                            <span className="project-arrow">↗</span>
+                          </div>
+                          <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity duration-300">Click</span>
+                        </div>
+                      </div>
+
+                      <div className="project-body">
+                        <h3>{project.title}</h3>
+                        <p>{project.description}</p>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-2 relative z-10">
+                        {project.stack.map((tag) => (
+                          <div
+                            key={tag}
+                            className="relative px-[10px] py-[6px] border border-[var(--border)] text-[var(--foreground)] opacity-80 bg-white/2 transition-all duration-300 cursor-pointer flex items-center gap-2 outline-none hover:border-[var(--cyan)] hover:opacity-100 hover:-translate-y-[2px] hover:shadow-[0_2px_10px_rgba(125,249,229,0.15)] hover:bg-[rgba(125,249,229,0.05)] group/tile rounded-sm"
+                          >
+                            <span className="font-mono text-[10px] whitespace-nowrap pointer-events-none">{tag}</span>
+                            <div className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--cyan)] shadow-[0_0_6px_var(--cyan)] transition-all duration-300 opacity-0 scale-0 group-hover/tile:opacity-100 group-hover/tile:scale-100 pointer-events-none" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    </article>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+
+          {/* Trajectory Segment: Work -> Journey */}
+          <div className="w-full justify-center hidden md:flex opacity-[0.15] pointer-events-none z-0 relative h-32 items-center">
+            <svg width="2" height="100%" viewBox="0 0 2 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M1 0 V128" stroke="var(--cyan)" strokeWidth="0.5" strokeDasharray="4 6" />
+               <circle cx="1" cy="0" r="1.5" fill="var(--cyan)" />
+               <circle cx="1" cy="128" r="1.5" fill="var(--cyan)" />
+            </svg>
+          </div>
 
           {/* Journey & Timeline Section */}
           <section id="journey" className="journey section-pad">
