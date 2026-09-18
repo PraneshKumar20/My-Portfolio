@@ -413,7 +413,8 @@ h2 em,
   margin-top: 122px;
   display: flex;
   justify-content: space-between;
-  color: #57565e;
+  color: var(--cyan);
+  opacity: 0.75;
   font: 9px var(--font-mono);
   letter-spacing: 0.12em;
   position: relative;
@@ -608,6 +609,20 @@ h2 em,
 }
 
 
+
+
+.work::before,
+.about::before,
+.journey::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 54px;
+  background: linear-gradient(to bottom, var(--cyan), transparent);
+  opacity: 0.35;
+}
 
 .section-heading {
   display: flex;
@@ -1158,7 +1173,8 @@ h2 em,
 
 .timeline-date {
   font: 10px var(--font-mono);
-  color: var(--cyan);
+  color: var(--muted-foreground);
+  opacity: 0.9;
   letter-spacing: 0.1em;
 }
 
@@ -1560,3 +1576,4 @@ h2 em,
     transition: none;
   }
 }
+

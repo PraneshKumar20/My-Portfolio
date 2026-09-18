@@ -203,12 +203,12 @@ const InteractiveToolkitCard: React.FC<InteractiveToolkitCardProps> = ({ activeF
         <div className="absolute top-[25%] left-[80%] w-1 h-1 bg-[var(--cyan)] rounded-full opacity-40 transition-transform duration-75 ease-out" style={{ transform: 'translate(calc((var(--mouse-x) - 0.5) * 20px), calc((var(--mouse-y) - 0.5) * -40px))' }} />
         
         <svg className="absolute inset-0 w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="none">
-           <path d="M 100 75 Q 200 50 300 75 T 300 225 Q 200 250 100 225 T 100 75" fill="none" stroke="var(--cyan)" strokeWidth="1.5" strokeDasharray="4 6" />
-           <path d="M 100 75 L 300 225" fill="none" stroke="var(--purple)" strokeWidth="1.5" strokeDasharray="2 6" />
-           <circle cx="100" cy="75" r="4" fill="var(--cyan)" />
-           <circle cx="300" cy="75" r="4" fill="var(--cyan)" />
-           <circle cx="100" cy="225" r="4" fill="var(--purple)" />
-           <circle cx="300" cy="225" r="4" fill="var(--purple)" />
+           <path d="M 100 75 Q 200 50 300 75 T 300 225 Q 200 250 100 225 T 100 75" fill="none" stroke="var(--cyan)" strokeWidth="1.5" strokeDasharray="4 6" className="animate-path-flow" />
+           <path d="M 100 75 L 300 225" fill="none" stroke="var(--purple)" strokeWidth="1.5" strokeDasharray="2 6" className="animate-path-flow" />
+           <circle cx="100" cy="75" r="4" fill="var(--cyan)"  className="animate-node-pulse" />
+           <circle cx="300" cy="75" r="4" fill="var(--cyan)"  className="animate-node-pulse" />
+           <circle cx="100" cy="225" r="4" fill="var(--purple)"  className="animate-node-pulse-purple" />
+           <circle cx="300" cy="225" r="4" fill="var(--purple)"  className="animate-node-pulse-purple" />
         </svg>
       </div>
 
@@ -635,13 +635,6 @@ export default function App() {
       <CustomCursor />
       <PageTransition>
         <main ref={rootRef} className="site-shell">
-          {/* Global Orbital Arcs */}
-          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden hidden md:block" aria-hidden="true">
-            <div className="absolute top-[-50vh] left-[-20vw] w-[150vw] h-[150vw] rounded-full border-[1px] border-[var(--cyan)] opacity-[0.03]" />
-            <div className="absolute bottom-[-60vh] right-[-30vw] w-[180vw] h-[180vw] rounded-full border-[1px] border-[var(--purple)] opacity-[0.02]" />
-            <div className="absolute top-[20vh] left-[-40vw] w-[200vw] h-[200vw] rounded-full border-[1px] border-[var(--cyan)] opacity-[0.02]" />
-          </div>
-
           {/* Global Scroll Progress Bar */}
           <div className="scroll-progress-bar fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--cyan)] to-[var(--purple)] origin-left scale-x-0 z-[9999] pointer-events-none" />
 
@@ -743,9 +736,6 @@ export default function App() {
               data-portrait
               aria-label="Interactive portrait of Pranesh Kumar"
             >
-              {/* Static Concentric Ring */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] rounded-full border border-[var(--cyan)] opacity-[0.06] pointer-events-none hidden md:block" aria-hidden="true" />
-
               <div className="orbital-ring" aria-hidden="true">
                 <div className="orbital-dot"></div>
               </div>
@@ -783,31 +773,8 @@ export default function App() {
             </div>
           </section>
 
-          {/* Trajectory Segment: Hero -> About */}
-          <div className="w-full justify-center hidden md:flex opacity-[0.15] pointer-events-none z-0 relative h-40 items-center">
-            <svg width="100" height="160" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M50 0 L50 60 C50 80, 80 80, 80 100 L80 160" stroke="var(--cyan)" strokeWidth="0.5" strokeDasharray="4 4" />
-               <circle cx="50" cy="0" r="1.5" fill="var(--cyan)" />
-               <circle cx="50" cy="60" r="2" fill="var(--background)" stroke="var(--cyan)" strokeWidth="1" />
-               <circle cx="80" cy="100" r="2" fill="var(--background)" stroke="var(--purple)" strokeWidth="1" />
-               <circle cx="80" cy="160" r="1.5" fill="var(--purple)" />
-            </svg>
-          </div>
-
           {/* About & Bento Grid Section */}
           <section id="about" className="about section-pad relative">
-            {/* Local Constellation Background */}
-            <div className="absolute inset-0 z-0 pointer-events-none hidden md:block overflow-hidden" aria-hidden="true">
-               <svg className="absolute w-[120%] h-[120%] top-[-10%] left-[-10%] opacity-[0.06]" viewBox="0 0 1000 600" fill="none" preserveAspectRatio="xMidYMid slice">
-                 <path d="M200,100 C300,100 400,200 450,350 C500,500 600,550 800,500" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="4 4" />
-                 <path d="M450,350 L550,200 L700,250" stroke="var(--purple)" strokeWidth="0.5" strokeDasharray="4 4" />
-                 <circle cx="200" cy="100" r="3" fill="var(--cyan)" />
-                 <circle cx="450" cy="350" r="4" fill="var(--background)" stroke="var(--cyan)" strokeWidth="1.5" />
-                 <circle cx="550" cy="200" r="2.5" fill="var(--purple)" />
-                 <circle cx="700" cy="250" r="3" fill="var(--purple)" />
-                 <circle cx="800" cy="500" r="3" fill="var(--cyan)" />
-               </svg>
-            </div>
             <div className="section-heading reveal relative z-10">
               <div>
                 <span className="section-index">01 /</span>
@@ -887,16 +854,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Trajectory Segment: About -> Work */}
-          <div className="w-full justify-center hidden md:flex opacity-[0.15] pointer-events-none z-0 relative h-40 items-center">
-            <svg width="100" height="160" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M80 0 L80 60 C80 80, 50 80, 50 100 L50 160" stroke="var(--cyan)" strokeWidth="0.5" strokeDasharray="4 4" />
-               <circle cx="80" cy="0" r="1.5" fill="var(--purple)" />
-               <circle cx="80" cy="60" r="2" fill="var(--background)" stroke="var(--purple)" strokeWidth="1" />
-               <circle cx="50" cy="100" r="2" fill="var(--background)" stroke="var(--cyan)" strokeWidth="1" />
-               <circle cx="50" cy="160" r="1.5" fill="var(--cyan)" />
-            </svg>
-          </div>
+          
 
           {/* Selected Work Section */}
           <section id="work" className="work section-pad">
@@ -946,18 +904,18 @@ export default function App() {
                   <div className="reveal project-card-wrapper relative z-10" key={project.title}>
                     {/* Waypoint Entry Trajectory */}
                     {index === 0 && (
-                      <div className="absolute top-[-64px] right-[20%] w-[100px] h-[64px] opacity-[0.15] pointer-events-none hidden lg:block z-[-1]">
+                      <div className="absolute top-[-64px] right-[20%] w-[100px] h-[64px] opacity-[0.55] pointer-events-none hidden lg:block z-[-1]">
                         <svg width="100" height="64" viewBox="0 0 100 64" fill="none">
-                          <path d="M100 0 C50 0, 0 32, 0 64" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="4 6" />
+                          <path d="M100 0 C50 0, 0 32, 0 64" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="4 6" className="animate-path-flow" />
                         </svg>
                       </div>
                     )}
                     {/* Inter-project Trajectory */}
                     {index === 1 && (
-                      <div className="absolute top-[-64px] left-[15%] w-[150px] h-[64px] opacity-[0.15] pointer-events-none hidden lg:block z-[-1]">
+                      <div className="absolute top-[-64px] left-[15%] w-[150px] h-[64px] opacity-[0.55] pointer-events-none hidden lg:block z-[-1]">
                         <svg width="150" height="64" viewBox="0 0 150 64" fill="none">
-                          <path d="M0 0 C50 32, 100 32, 150 64" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="4 6" />
-                          <circle cx="75" cy="32" r="2.5" fill="var(--background)" stroke="var(--purple)" strokeWidth="1" />
+                          <path d="M0 0 C50 32, 100 32, 150 64" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="4 6" className="animate-path-flow" />
+                          <circle cx="75" cy="32" r="2.5" fill="var(--background)" stroke="var(--purple)" strokeWidth="1"  className="animate-node-pulse-hollow" />
                         </svg>
                       </div>
                     )}
@@ -1004,7 +962,7 @@ export default function App() {
                           <div className="project-arrow-wrap" aria-hidden="true">
                             <span className="project-arrow">↗</span>
                           </div>
-                          <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity duration-300">Click</span>
+                          <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-80 group-hover:opacity-100 transition-opacity duration-300">Click</span>
                         </div>
                       </div>
 
@@ -1032,14 +990,7 @@ export default function App() {
             )}
           </section>
 
-          {/* Trajectory Segment: Work -> Journey */}
-          <div className="w-full justify-center hidden md:flex opacity-[0.15] pointer-events-none z-0 relative h-32 items-center">
-            <svg width="2" height="100%" viewBox="0 0 2 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M1 0 V128" stroke="var(--cyan)" strokeWidth="0.5" strokeDasharray="4 6" />
-               <circle cx="1" cy="0" r="1.5" fill="var(--cyan)" />
-               <circle cx="1" cy="128" r="1.5" fill="var(--cyan)" />
-            </svg>
-          </div>
+          
 
           {/* Journey & Timeline Section */}
           <section id="journey" className="journey section-pad">
@@ -1159,7 +1110,7 @@ export default function App() {
                         <div className="project-arrow-wrap">
                           <ArrowUpRight className="project-arrow" size={18} />
                         </div>
-                        <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity duration-300">Click</span>
+                        <span className="absolute top-[100%] mt-1 text-[9px] font-mono text-[var(--cyan)] uppercase tracking-widest opacity-80 group-hover:opacity-100 transition-opacity duration-300">Click</span>
                       </div>
                     </div>
                   </div>
